@@ -14,15 +14,11 @@ const MenuBar = ({ editor } : {editor: Editor}) => {
   }
 
   return (
-    <>
+    <div className="Menubar">
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={
-          !editor.can()
-            .chain()
-            .focus()
-            .toggleBold()
-            .run()
+          !editor.can().chain().focus().toggleBold().run()
         }
         className={editor.isActive('bold') ? 'is-active' : ''}
       >
@@ -67,7 +63,7 @@ const MenuBar = ({ editor } : {editor: Editor}) => {
       >
         code
       </button>
-      <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>
+      {/* <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>
         clear marks
       </button>
       <button onClick={() => editor.chain().focus().clearNodes().run()}>
@@ -78,7 +74,7 @@ const MenuBar = ({ editor } : {editor: Editor}) => {
         className={editor.isActive('paragraph') ? 'is-active' : ''}
       >
         paragraph
-      </button>
+      </button> */}
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
         className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}
@@ -175,7 +171,7 @@ const MenuBar = ({ editor } : {editor: Editor}) => {
       >
         purple
       </button>
-    </>
+    </div>
   )
 }
 
@@ -193,6 +189,9 @@ export default () => {
         orderedList: {
           keepMarks: true,
           keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+        },
+        heading: {
+          levels: [1,2,3,4,5,6],
         },
       }),
     ],

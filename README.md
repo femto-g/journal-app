@@ -1,1 +1,1 @@
-# jouranl
+# journal
