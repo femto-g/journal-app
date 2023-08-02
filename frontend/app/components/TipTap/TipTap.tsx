@@ -7,6 +7,7 @@ import { Editor, EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import React from 'react'
 import './styles.css'
+import Underline from '@tiptap/extension-underline'
 
 const MenuBar = ({ editor } : {editor: Editor}) => {
   if (!editor) {
@@ -22,7 +23,17 @@ const MenuBar = ({ editor } : {editor: Editor}) => {
         }
         className={editor.isActive('bold') ? 'is-active' : ''}
       >
+
+
         bold
+      </button>
+
+      <button
+        onClick={() => editor.chain().focus().toggleUnderline().run()}
+        disabled={!editor.can().chain().focus().toggleBold().run()}
+        className={editor.isActive('bold') ? 'is-active': ''}
+      >
+        underline
       </button>
       <button
         onClick={() => editor.chain().focus().toggleItalic().run()}
@@ -93,7 +104,7 @@ const MenuBar = ({ editor } : {editor: Editor}) => {
       >
         h3
       </button>
-      <button
+      {/* <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
         className={editor.isActive('heading', { level: 4 }) ? 'is-active' : ''}
       >
@@ -110,7 +121,7 @@ const MenuBar = ({ editor } : {editor: Editor}) => {
         className={editor.isActive('heading', { level: 6 }) ? 'is-active' : ''}
       >
         h6
-      </button>
+      </button> */}
       <button
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         className={editor.isActive('bulletList') ? 'is-active' : ''}
@@ -123,7 +134,7 @@ const MenuBar = ({ editor } : {editor: Editor}) => {
       >
         ordered list
       </button>
-      <button
+      {/* <button
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
         className={editor.isActive('codeBlock') ? 'is-active' : ''}
       >
@@ -137,10 +148,10 @@ const MenuBar = ({ editor } : {editor: Editor}) => {
       </button>
       <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
         horizontal rule
-      </button>
-      <button onClick={() => editor.chain().focus().setHardBreak().run()}>
+      </button> */}
+      {/* <button onClick={() => editor.chain().focus().setHardBreak().run()}>
         hard break
-      </button>
+      </button> */}
       <button
         onClick={() => editor.chain().focus().undo().run()}
         disabled={
@@ -165,12 +176,12 @@ const MenuBar = ({ editor } : {editor: Editor}) => {
       >
         redo
       </button>
-      <button
+      {/* <button
         onClick={() => editor.chain().focus().setColor('#958DF1').run()}
         className={editor.isActive('textStyle', { color: '#958DF1' }) ? 'is-active' : ''}
       >
         purple
-      </button>
+      </button> */}
     </div>
   )
 }
@@ -191,9 +202,10 @@ export default () => {
           keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
         },
         heading: {
-          levels: [1,2,3,4,5,6],
+          levels: [1,2,3],
         },
       }),
+      Underline,
     ],
     content: `
       <h2>
