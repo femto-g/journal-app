@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import Entry from "../Entry/Entry";
 
-export default function EntryContainer(){
+export default function EntryContainer({selectEntry} : {selectEntry : Function}){
 
-  const [entries, setEntries] = useState<Array<JSX.Element> | null>([]);
-  const [listItems, setListItems] = useState<Array<JSX.Element> | null>([]);
+  const [entries, setEntries] = useState<Array<JSX.Element>>([]);
+  const [listItems, setListItems] = useState<Array<JSX.Element>>([]);
 
   useEffect(() => {
-    const newListItems : Array<JSX.Element> = entries!.map((entry : JSX.Element) => {
+    const newListItems : Array<JSX.Element> = entries.map((entry : JSX.Element) => {
       return(
       <li>
         {entry}
@@ -18,7 +18,7 @@ export default function EntryContainer(){
   },[entries])
 
   const createNewEntry = () =>{
-    setEntries([...entries!, <Entry/>]);
+    setEntries([...entries, <Entry openEntry={selectEntry}/>]);
   }
  
   return(

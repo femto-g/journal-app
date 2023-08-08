@@ -5,20 +5,22 @@ import TipTap from "../TipTap/TipTap";
 
 export default function MainApp(){
 
-  const [journal, setJournal] = useState();
-  const [entry, setEntry] = useState();
+  //using number as temporary type. 
+  const [journal, setJournal] = useState<Number | null>(null);
+  const [entry, setEntry] = useState<Number | null>(null);
+
 
   if(journal === null){
     return(
       //takes a user
-      <JournalContainer/>
+      <JournalContainer selectJournal={setJournal}/>
     )
   }
   else{
     if(entry === null){
       return(
         //takes a journal
-        <EntryContainer/>
+        <EntryContainer selectEntry={setEntry}/>
       )
     }
 

@@ -1,9 +1,14 @@
-export default function Entry(){
+export default function Entry({openEntry} : {openEntry : Function}){
+
+ 
+  const openE = (e: any) => {
+    openEntry(0)
+  }
 
   return(
-    <button className="border-2 border-black">
-      <h1>Name of Entry</h1>
-      <h2>Date</h2>
+    <button onClick={openE} className="border-2 border-black" >
+      <h2>Name of Entry</h2>
+      <h3>Date</h3>
       <p>Some text</p>
     </button>
   )
