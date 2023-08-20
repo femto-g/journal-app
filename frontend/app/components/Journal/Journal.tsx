@@ -7,8 +7,8 @@ export default function Journal({openJournal} : {openJournal : Function}){
   }
 
   return(
-    <div>
-      <button onClick={openJ} className="border-2 border-black">
+    <div className="border-2 border-black">
+      <button onClick={openJ} >
         <h2>Journal Title</h2>
       </button>
     </div>

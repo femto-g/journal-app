@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Journal from "../Journal/Journal";
+import NewItemSwitcher from "../NewItemSwitcher/NewItemSwitcher";
+import NewJournalForm from "../NewJournalForm/NewJournalForm";
 
 export default function JournalContainer({selectJournal} : {selectJournal : Function}){
 
@@ -22,11 +24,12 @@ export default function JournalContainer({selectJournal} : {selectJournal : Func
   }
  
   return(
-    <div>
+    <div className="container mx-auto">
       <ul>
         {listItems}
       </ul>
-      <button onClick={createNewJournal}>Create new journal </button>
+      {/* <button onClick={createNewJournal}>Create new journal </button> */}
+      <NewItemSwitcher text="Create new journal" newItemForm={<NewJournalForm />} />
     </div>
   )
 }
