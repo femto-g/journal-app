@@ -67,4 +67,3 @@ exports.app.use((err, req, res, next) => {
     console.log(err.stack);
     return res.sendStatus(500);
 });
-module.exports = { app: exports.app, httpServer: exports.httpServer, db };

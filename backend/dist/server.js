@@ -10,6 +10,6 @@ const envPath = path_1.default.resolve(__dirname, `../env/${process.env.NODE_ENV
 dotenv_1.default.config({ path: envPath });
 const _1 = require(".");
 const port = process.env.PORT;
-_1.httpServer.listen(port, function () {
+_1.httpServer.listen(port, () => {
     console.log(`Example app listening on port ${port}!`);
 });
