@@ -1,4 +1,4 @@
-import { Pool, PoolConfig } from 'pg';
+import { Pool, PoolConfig, QueryResult } from 'pg';
 //const pgSession = require('connect-pg-simple');
 import path from 'path';
 import dotenv from 'dotenv';
@@ -19,10 +19,15 @@ const poolOptions : PoolConfig = {
 
 const pool = new Pool(poolOptions);
 
-export const query = (text : string, params : any, callback : any) => {
-  return pool.query(text, params, callback);
-}
+export const query = (text : string, params : any, callback?: any) : void | Promise<QueryResult<any>> => {
 
+  if(callback !== undefined){
+    return pool.query(text, params, callback);
+  }
+  else{
+    return pool.query(text, params);
+  }
+}
 
 export const createStore = (sess : typeof session ) => {
   const store = connectPgSimple(sess)
