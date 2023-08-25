@@ -4,6 +4,7 @@ import * as db from '../db/index'
 import passport from 'passport';
 import passportLocal from 'passport-local';
 import crypto from 'crypto';
+import * as userAccess from '../db/access/user';
 
 // helpful links 
 // http://toon.io/understanding-passportjs-authentication-flow/
