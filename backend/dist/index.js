@@ -35,7 +35,10 @@ const cors_1 = __importDefault(require("cors"));
 exports.httpServer = http_1.default.createServer(exports.app);
 const db = __importStar(require("./db/index"));
 const pgStore = db.createStore(express_session_1.default);
-const auth_1 = require("./routes/auth");
+//import {router as authRouter} from './routes/auth';
+const new_auth_1 = require("./routes/new_auth");
+const journal_1 = require("./routes/journal");
+const entry_1 = require("./routes/entry");
 const body_parser_1 = __importDefault(require("body-parser"));
 const passport_1 = __importDefault(require("passport"));
 if (process.env.NODE_ENV === 'prod') {
@@ -62,7 +65,9 @@ const sessionMiddleware = (0, express_session_1.default)(sessionOptions);
 exports.app.use(sessionMiddleware);
 exports.app.use(passport_1.default.initialize());
 exports.app.use(passport_1.default.session());
-exports.app.use("/", auth_1.router);
+exports.app.use("/", new_auth_1.router);
+exports.app.use("/", journal_1.router);
+exports.app.use("/", entry_1.router);
 exports.app.use((err, req, res, next) => {
     console.log(err.stack);
     return res.sendStatus(500);

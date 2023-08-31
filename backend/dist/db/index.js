@@ -20,10 +20,16 @@ const poolOptions = {
     port: process.env.PGPORT
 };
 const pool = new pg_1.Pool(poolOptions);
-const query = (text, params, callback) => {
-    return pool.query(text, params, callback);
-};
+function query(text, params, callback) {
+    if (callback !== undefined) {
+        return pool.query(text, params, callback);
+    }
+    else {
+        return pool.query(text, params);
+    }
+}
 exports.query = query;
+;
 const createStore = (sess) => {
     const store = (0, connect_pg_simple_1.default)(sess);
     return new store({

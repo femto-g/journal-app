@@ -74,7 +74,7 @@ router.get('/logout', function(req, res, next) {
   try {
     logout();
   } catch (error) {
-    
+    return next(error);
   }
   res.sendStatus(200);
   // req.logout(function(err) {
