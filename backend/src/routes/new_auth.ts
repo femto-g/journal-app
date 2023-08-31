@@ -20,6 +20,9 @@ passport.use(new LocalStrategy(async function verify(username, password, done) {
   //done() is the function passed to passport.authenticate()
   try {
     const result = await userAccess.readUser(username);
+    if(result.rows.length === 0){
+      return done(null, false);
+    }
     const row : userAccess.User = result.rows[0];
     const hashedPassword = await cryptoPbkdf2(password, row.salt, 310000, 32, 'sha256');
     if (!crypto.timingSafeEqual(row.hashed_password, hashedPassword)) {
@@ -34,7 +37,11 @@ passport.use(new LocalStrategy(async function verify(username, password, done) {
 }));
 
 passport.serializeUser((user : any, done) => {
-  done(null, {username: user.username});
+  const serializedUser = {
+    username: user.username,
+    user_id: user.user_id
+  }
+  done(null, serializedUser);
 });
 
 passport.deserializeUser((user : any, done) => {
@@ -83,6 +90,11 @@ router.post('/signup', async function(req, res, next) {
   const salt = crypto.randomBytes(16);
   const username = req.body.username;
   try {
+    //to avoid duplicae key constraint db error
+    const result = await userAccess.readUser(username);
+    if(result.rows.length > 0){
+      return res.sendStatus(401);
+    }
     const hashed_password = await cryptoPbkdf2(req.body.password, salt, 310000, 32, 'sha256');
     const user : userAccess.User = {
       username,
@@ -94,7 +106,8 @@ router.post('/signup', async function(req, res, next) {
       username
     }
     await login(user);
-    res.sendStatus(200);
+    //maybe add logging here?
+    return res.sendStatus(200);
     // req.login(user, function(err) {
     //   if (err) {
     //     return next(err); 

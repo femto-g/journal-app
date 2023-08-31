@@ -3,7 +3,7 @@ import * as db from '../index';
 
 export interface Entry {
   entry_id? : number;
-  date : Date;
+  date : string;
   content_html: string;
   containing_journal: number;
 }
@@ -20,11 +20,19 @@ export async function createEntry(entry : Entry) : Promise<QueryResult<any>>{
 
 export async function readEntries(containing_journal : number) : Promise<QueryResult<any>> {
 
-  const queryText : string = "SELECT * FROM journals where containing_journal=($1)";
+  const queryText : string = "SELECT * FROM entries where containing_journal=($1)";
   const params : Array<any> = [containing_journal];
   const result = await db.query(queryText, params)!;
   
   return result;
   
+}
+
+export async function updateEntry(id : number, content : string) : Promise<QueryResult<any>> {
+  const queryText : string = "UPDATE entries SET content_html = ($1) WHERE entry_id = ($2)";
+  const params : Array<any> = [content, id];
+  const result = await db.query(queryText, params);
+
+  return result;
 }
 

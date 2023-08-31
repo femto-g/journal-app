@@ -21,7 +21,7 @@ export async function createUser(user : User) : Promise<QueryResult<any>> {
 
 export async function readUser(username : string) : Promise<QueryResult<any>> {
 
-  const queryText : string = "'SELECT * FROM users WHERE username = $1'";
+  const queryText : string = "SELECT * FROM users WHERE username = $1";
   const params : Array<any> = [username];
   const result = await db.query(queryText, params);
   

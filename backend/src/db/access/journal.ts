@@ -16,7 +16,7 @@ export async function createJournal(journal : Journal) : Promise<QueryResult<any
   const params : Array<any> = [journal.title, journal.owner];
   const result = await db.query(queryText, params);
 
-  return result!;
+  return result;
 }
 
 export async function readJournals(owner : number) : Promise<QueryResult<any>> {
@@ -25,7 +25,7 @@ export async function readJournals(owner : number) : Promise<QueryResult<any>> {
   const params : Array<any> = [owner];
   const result = await db.query(queryText, params);
   
-  return result!;
+  return result;
   
 }
 

@@ -7,7 +7,9 @@ export const httpServer = http.createServer(app);
 import * as db from './db/index';
 const pgStore = db.createStore(session);
 //import {router as authRouter} from './routes/auth';
-import {router as authRouter} from './routes/new_auth'
+import {router as authRouter} from './routes/new_auth';
+import {router as journalRouter} from './routes/journal';
+import {router as entryRouter} from './routes/entry';
 import bodyParser from 'body-parser';
 import passport from 'passport';
 
@@ -42,6 +44,8 @@ app.use(passport.session());
 
 
 app.use("/", authRouter);
+app.use("/", journalRouter);
+app.use("/", entryRouter);
 
 app.use((err: { stack: any; }, req : Request, res : Response, next: any) => {
 	console.log(err.stack);
