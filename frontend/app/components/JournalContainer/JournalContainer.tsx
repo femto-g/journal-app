@@ -17,7 +17,7 @@ export default function JournalContainer({selectJournal} : {selectJournal : Func
       )
     });
     setListItems(newListItems);
-  },[journals])
+  },[journals]);
 
   const createNewJournal = () =>{
     setJournals([...journals, <Journal openJournal={selectJournal}/>]);
