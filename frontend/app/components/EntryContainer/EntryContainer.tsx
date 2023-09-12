@@ -17,16 +17,16 @@ export default function EntryContainer({selectEntry} : {selectEntry : Function})
     setListItems(newListItems);
   },[entries])
 
-  const createNewEntry = () =>{
-    setEntries([...entries, <Entry openEntry={selectEntry}/>]);
-  }
+  // const createNewEntry = () =>{
+  //   setEntries([...entries, <Entry openEntry={selectEntry}/>]);
+  // }
  
   return(
     <div>
       <ul>
         {listItems}
       </ul>
-      <button onClick={createNewEntry}>Add new entry</button>
+      {/* <button onClick={createNewEntry}>Add new entry</button> */}
     </div>
   )
 }

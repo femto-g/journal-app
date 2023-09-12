@@ -1,13 +1,16 @@
+'use client';
 import { useState } from "react";
 import JournalContainer from "../JournalContainer/JournalContainer";
 import EntryContainer from "../EntryContainer/EntryContainer";
 import TipTap from "../TipTap/TipTap";
+import Entry, { IEntry } from "../Entry/Entry";
+import { IJournal } from "../Journal/Journal";
 
 export default function MainApp(){
 
   //using number as temporary type. 
-  const [journal, setJournal] = useState<Number | null>(null);
-  const [entry, setEntry] = useState<Number | null>(null);
+  const [journal, setJournal] = useState<IJournal | null>(null);
+  const [entry, setEntry] = useState<IEntry | null>(null);
 
 
   if(journal === null){

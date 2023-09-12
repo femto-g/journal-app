@@ -1,15 +1,21 @@
-export default function Journal({openJournal} : {openJournal : Function}){
+export interface IJournal {
+  journal_id?: number;
+  title: string;
+  owner: number;
+}
+export default function Journal({openJournal, journal} : {openJournal : Function, journal : IJournal}){
 
   const openJ = (e: any) =>  {
 
-    openJournal(0);
+    //change this function?
+    openJournal(journal);
     
   }
 
   return(
     <div className="border-2 border-black">
       <button onClick={openJ} >
-        <h2>Journal Title</h2>
+        <h2>{journal.title}</h2>
       </button>
     </div>
   )

@@ -10,7 +10,8 @@ export default function SignUpContainer(){
 
   return(
     <div>
-      <SignUpForm signupHandler={signup} />
+      {/* <SignUpForm signupHandler={signup} /> */}
+      <SignUpForm />
     </div>
   )
 } 

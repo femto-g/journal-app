@@ -8,6 +8,7 @@ export default function JournalContainer({selectJournal} : {selectJournal : Func
   const [journals, setJournals] = useState<Array<JSX.Element>>([]);
   const [listItems, setListItems] = useState<Array<JSX.Element>>([]);
 
+
   useEffect(() => {
     const newListItems : Array<JSX.Element> = journals.map((entry : JSX.Element) => {
       return(
@@ -19,9 +20,9 @@ export default function JournalContainer({selectJournal} : {selectJournal : Func
     setListItems(newListItems);
   },[journals]);
 
-  const createNewJournal = () =>{
-    setJournals([...journals, <Journal openJournal={selectJournal}/>]);
-  }
+  // const createNewJournal = () =>{
+  //   setJournals([...journals, <Journal openJournal={selectJournal}/>]);
+  // }
  
   return(
     <div className="container mx-auto">

@@ -1,11 +1,13 @@
 'use client';
+import { fetchPost } from "@/app/util/util";
 import { SetStateAction, useState } from "react";
 
-export default function SignUpForm( {signupHandler} : {signupHandler : Function} ){
+export default function SignUpForm( /*{signupHandler} : {signupHandler : Function}*/){
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
 
   const onUsernameChange = (e: { target: { value: SetStateAction<string>; }; }) => {
@@ -16,18 +18,36 @@ export default function SignUpForm( {signupHandler} : {signupHandler : Function}
     setPassword(e.target.value);
   }
 
-  const onPassword2Change = (e: { target: { value: SetStateAction<string>; }; }) => {
+  const onPassword2Change = (e: any) => {
     setPassword2(e.target.value);
+    if(password !== e.target.value){
+      e.target.setCustomValidity('Passwords do not match.');
+    }
+    else{
+      e.target.setCustomValidity('');
+    }
   }
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    const response = await signupHandler(username, password);
+    //const response = await signupHandler(username, password);
+    try {
+    const response = await fetchPost('signup', {username, password}) as Response;
+    if(response.ok){
+      //redirect
+    }
+    else{
+      setErrorMessage('Log in with this username or sign up with a different username');
+    }
+    } catch (error) {
+      console.log(error);
+    }
   
   }
 
   return(
     <div>
+      {errorMessage}
       <form action='submit' onSubmit={handleSubmit}>
         <label htmlFor="username">Username</label>
         <input id="username" type="text" value={username} onChange={onUsernameChange} required maxLength={20}></input>
