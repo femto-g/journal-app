@@ -1,5 +1,6 @@
 'use client';
 import { fetchPost } from "@/app/util/util";
+import { redirect, useRouter } from "next/navigation";
 import { SetStateAction, useState } from "react";
 
 export default function LoginForm( /*{loginHandler} : {loginHandler : Function}*/ ){
@@ -7,6 +8,8 @@ export default function LoginForm( /*{loginHandler} : {loginHandler : Function}*
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const router = useRouter();
 
 
 
@@ -27,6 +30,8 @@ export default function LoginForm( /*{loginHandler} : {loginHandler : Function}*
 
       if(response.ok){
         //redirect
+        //redirect('../../main');
+        router.push('../../main');
       }
       else{
         setErrorMessage('Incorrect Username or Password.');

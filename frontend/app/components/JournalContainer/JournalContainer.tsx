@@ -1,19 +1,42 @@
 import { useEffect, useState } from "react";
-import Journal from "../Journal/Journal";
+import Journal, { IJournal } from "../Journal/Journal";
 import NewItemSwitcher from "../NewItemSwitcher/NewItemSwitcher";
 import NewJournalForm from "../NewJournalForm/NewJournalForm";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { fetchGet, fetchPost } from "@/app/util/util";
 
 export default function JournalContainer({selectJournal} : {selectJournal : Function}){
 
-  const [journals, setJournals] = useState<Array<JSX.Element>>([]);
+  const [journals, setJournals] = useState<Array<IJournal>>([]);
   const [listItems, setListItems] = useState<Array<JSX.Element>>([]);
+  const [displayForm, setDisplayForm] = useState<boolean>(false);
 
+  const result = useQuery({
+    queryKey : ["journals"],
+    queryFn : async () => {
+      try {
+        const res = await fetchGet('journals') as Response;
+        return res.json(); 
+      } catch (error) {
+        return error;
+      }
+    },
+    onSuccess(data) {
+      setJournals(data);
+    },
+  });
+
+  // const data : Array<IJournal> = result.data as Array<IJournal>;
+
+  // if(data){
+  //   setJournals(data);
+  // }
 
   useEffect(() => {
-    const newListItems : Array<JSX.Element> = journals.map((entry : JSX.Element) => {
+    const newListItems : Array<JSX.Element> = journals.map((journal) => {
       return(
       <li>
-        {entry}
+        <Journal journal={journal} openJournal={selectJournal} />
       </li>
       )
     });
@@ -23,14 +46,21 @@ export default function JournalContainer({selectJournal} : {selectJournal : Func
   // const createNewJournal = () =>{
   //   setJournals([...journals, <Journal openJournal={selectJournal}/>]);
   // }
+
+  // const journalMutation = useMutation({
+  //   mutationFn : async (title) => {
+  //     return fetchPost('journal', {title});
+  //   }
+  // });
  
   return(
     <div className="container mx-auto">
       <ul>
         {listItems}
       </ul>
-      {/* <button onClick={createNewJournal}>Create new journal </button> */}
-      <NewItemSwitcher text="Create new journal" newItemForm={<NewJournalForm />} />
+      <button onClick={() => setDisplayForm(!displayForm)}>Start new Journal</button>
+      <NewJournalForm display={displayForm} />
+      {/* <NewItemSwitcher text="Create new journal" newItemForm={<NewJournalForm />} /> */}
     </div>
   )
 }

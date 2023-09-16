@@ -63,6 +63,7 @@ router.post('/login', (req, res, next) => {
         if (err) {
           return next(err); 
         }
+        //console.log(`logged in as ${user.username}`);
         res.sendStatus(200);
       });
     }
@@ -107,6 +108,7 @@ router.post('/signup', async function(req, res, next) {
     }
     await login(user);
     //maybe add logging here?
+    console.log(`logged in as ${username}`);
     return res.sendStatus(200);
     // req.login(user, function(err) {
     //   if (err) {

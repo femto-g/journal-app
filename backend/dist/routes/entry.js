@@ -17,11 +17,11 @@ const express_promise_router_1 = __importDefault(require("express-promise-router
 exports.router = (0, express_promise_router_1.default)();
 const entry_1 = require("../db/access/entry");
 require("../util/types/index");
-exports.router.get('/entries', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.router.post('/entries', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     if (!req.user) {
         return next(new Error('Not authenticated'));
     }
-    const containing_journal = req.body.journal_id;
+    const containing_journal = req.body.containing_journal;
     try {
         const result = yield (0, entry_1.readEntries)(containing_journal);
         const entries = result.rows;

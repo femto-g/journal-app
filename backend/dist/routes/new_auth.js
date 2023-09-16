@@ -94,6 +94,7 @@ exports.router.post('/login', (req, res, next) => {
                 if (err) {
                     return next(err);
                 }
+                //console.log(`logged in as ${user.username}`);
                 res.sendStatus(200);
             });
         }
@@ -138,6 +139,7 @@ exports.router.post('/signup', function (req, res, next) {
             };
             yield login(user);
             //maybe add logging here?
+            console.log(`logged in as ${username}`);
             return res.sendStatus(200);
             // req.login(user, function(err) {
             //   if (err) {

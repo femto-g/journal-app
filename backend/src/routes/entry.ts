@@ -3,13 +3,13 @@ export const router = Router();
 import {createEntry, readEntries, Entry, updateEntry} from '../db/access/entry';
 import '../util/types/index';
 
-router.get('/entries', async (req, res, next) => {
+router.post('/entries', async (req, res, next) => {
 
   if(!req.user){
     return next(new Error('Not authenticated'));
   }
 
-  const containing_journal = req.body.journal_id;
+  const containing_journal = req.body.containing_journal;
 
   try {
     const result = await readEntries(containing_journal);

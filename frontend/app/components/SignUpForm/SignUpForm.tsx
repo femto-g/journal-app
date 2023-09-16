@@ -1,5 +1,6 @@
 'use client';
 import { fetchPost } from "@/app/util/util";
+import { redirect, useRouter } from "next/navigation";
 import { SetStateAction, useState } from "react";
 
 export default function SignUpForm( /*{signupHandler} : {signupHandler : Function}*/){
@@ -8,6 +9,8 @@ export default function SignUpForm( /*{signupHandler} : {signupHandler : Functio
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const router = useRouter();
 
 
   const onUsernameChange = (e: { target: { value: SetStateAction<string>; }; }) => {
@@ -35,6 +38,7 @@ export default function SignUpForm( /*{signupHandler} : {signupHandler : Functio
     const response = await fetchPost('signup', {username, password}) as Response;
     if(response.ok){
       //redirect
+      redirect('../../main');
     }
     else{
       setErrorMessage('Log in with this username or sign up with a different username');

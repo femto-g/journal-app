@@ -23,7 +23,7 @@ export default function MainApp(){
     if(entry === null){
       return(
         //takes a journal
-        <EntryContainer selectEntry={setEntry}/>
+        <EntryContainer selectEntry={setEntry} journal={journal}/>
       )
     }
 
