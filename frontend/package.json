@@ -29,7 +29,8 @@
     "react-dom": "18.2.0",
     "react-query": "^3.39.3",
     "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "usehooks-ts": "^2.9.1"
   },
   "devDependencies": {
     "postcss-nesting": "^12.0.0"

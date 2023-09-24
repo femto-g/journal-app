@@ -4,7 +4,7 @@ import ListItem from '@tiptap/extension-list-item'
 import TextStyle, { TextStyleOptions } from '@tiptap/extension-text-style'
 import { Editor, EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../Tiptap/styles.css'
 import Underline from '@tiptap/extension-underline'
 import { MenuBar } from "../TipTap/TipTap"
@@ -12,6 +12,7 @@ import { useQuery } from "@tanstack/react-query"
 import { fetchGet, fetchPost } from "@/app/util/util"
 import {useContext} from 'react';
 import { DataContext } from "@/app/contexts/DataContext"
+import {useDebounce} from 'usehooks-ts'
 
 export default function RichTextEditor({entry} : {entry : IEntry}){
 
@@ -21,6 +22,22 @@ export default function RichTextEditor({entry} : {entry : IEntry}){
   //     fetchPost('entry', )
   //   }
   // })
+
+  const [content, setContent] = useState<String>(entry.content_html);
+  const debouncedContent = useDebounce<String>(content, 2000);
+
+  useEffect(() => {
+    const body = {
+      entry_id : entry.entry_id,
+      content_html : debouncedContent
+     }
+    try {
+      fetchPost('update-entry', body);
+    } catch (error) {
+      console.log(error);
+    }
+
+  }, [debouncedContent]);
 
   const editor = useEditor({
     extensions: [
@@ -43,13 +60,14 @@ export default function RichTextEditor({entry} : {entry : IEntry}){
       Underline,
     ],
     content : entry.content_html,
-    onUpdate :  async ({editor}) => {
-      const html = editor.getHTML();
-      const body = {
-        entry_id : entry.entry_id,
-        content_html : html
-       }
-      await fetchPost('update-entry', body);
+    onUpdate : ({editor}) => {
+      // const html = editor.getHTML();
+      // const body = {
+      //   entry_id : entry.entry_id,
+      //   content_html : html
+      //  }
+      // await fetchPost('update-entry', body);
+      setContent(editor.getHTML());
     }
   });
 
