@@ -71,19 +71,19 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/logout', function(req, res, next) {
-  const logout = util.promisify(req.logout);
-  try {
-    logout();
-  } catch (error) {
-    return next(error);
-  }
-  res.sendStatus(200);
-  // req.logout(function(err) {
-  //   if (err) {
-  //     return next(err); 
-  //   }
-  //   res.sendStatus(200);
-  // });
+  // const logout = util.promisify(req.logout);
+  // try {
+  //   logout();
+  // } catch (error) {
+  //   return next(error);
+  // }
+  // res.sendStatus(200);
+  req.logout(function(err) {
+    if (err) {
+      return next(err); 
+    }
+    res.sendStatus(200);
+  });
 });
 
 router.post('/signup', async function(req, res, next) {

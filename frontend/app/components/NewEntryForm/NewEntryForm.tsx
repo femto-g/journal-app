@@ -36,7 +36,7 @@ export default function NewEntryForm({journalID, display} :{journalID : number, 
       <form action="submit" onSubmit={onSubmit}>
         {/* <label>Title</label>
         <input type="text"></input> */}
-        <button type='submit'>add newww entry</button>
+        <input type='submit' value={"Create New Entry"}></input>
       </form>
     </div>
     

@@ -50,4 +50,4 @@ app.use("/", entryRouter);
 app.use((err: { stack: any; }, req : Request, res : Response, next: any) => {
 	console.log(err.stack);
   return res.sendStatus(500);
-})
+}) 

@@ -35,7 +35,7 @@ export default function JournalContainer({selectJournal} : {selectJournal : Func
   useEffect(() => {
     const newListItems : Array<JSX.Element> = journals.map((journal) => {
       return(
-      <li>
+      <li key={journal.journal_id}>
         <Journal journal={journal} openJournal={selectJournal} />
       </li>
       )
@@ -55,11 +55,12 @@ export default function JournalContainer({selectJournal} : {selectJournal : Func
  
   return(
     <div className="container mx-auto">
+      <button onClick={() => setDisplayForm(!displayForm)}>Start new Journal</button>
+      <NewJournalForm display={displayForm} />
       <ul>
         {listItems}
       </ul>
-      <button onClick={() => setDisplayForm(!displayForm)}>Start new Journal</button>
-      <NewJournalForm display={displayForm} />
+      
       {/* <NewItemSwitcher text="Create new journal" newItemForm={<NewJournalForm />} /> */}
     </div>
   )

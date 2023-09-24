@@ -13,7 +13,7 @@ export default function Journal({openJournal, journal} : {openJournal : Function
   }
 
   return(
-    <div className="border-2 border-black">
+    <div className="border-[1px] border-black bg-purple-500 rounded-md text-center py-4">
       <button onClick={openJ} >
         <h2>{journal.title}</h2>
       </button>

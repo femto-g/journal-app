@@ -12,13 +12,20 @@ export default function Entry({openEntry, entry} : {openEntry : Function, entry 
     openEntry(entry);
   }
 
+  const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const monthNames =  ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const date : Date = new Date(entry.date);
+  const entryText = `${dayNames[date.getDay()]}, ${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+
   return(
-    <div className="border-2 border-black" >
-    <button onClick={openE}>
-      <div>{entry.date}</div>
-      {/* <div>{entry.date}</div> */}
-      <p>{entry.content_html}</p>
-    </button>
+    <div className="border-[1px] border-black rounded-md text-center my-10">
+      <button className="w-full" onClick={openE}>
+        <div className="bg-purple-300 ">{entryText}</div>
+        {/* <div>{entry.date}</div> */}
+        {/* <p>{entry.content_html}</p> */}
+        {/*TODO: MUST SANITIZE THIS CONTENT*/}
+        <div className="opacity-50"dangerouslySetInnerHTML={ {__html : entry.content_html}}></div>
+      </button>
     </div>
   )
 }

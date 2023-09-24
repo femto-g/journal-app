@@ -31,11 +31,11 @@ export default function NewJournalForm({display} : {display : boolean}) {
   }
 
   return (
-    <div style={display ? formStyle : {}}>
+    <div style={display ? {} : formStyle}>
       <form action='submit' onSubmit={onSubmit}>
         <label htmlFor="title">Title</label>
         <input type='text' id="title" onChange={onTitleChange} required></input>
-        <button type='submit'>submit</button>
+        <input type='submit' value={"Create"}></input>
       </form>
     </div>
   )

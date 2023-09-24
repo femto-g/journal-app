@@ -101,20 +101,19 @@ exports.router.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 exports.router.get('/logout', function (req, res, next) {
-    const logout = util_1.default.promisify(req.logout);
-    try {
-        logout();
-    }
-    catch (error) {
-        return next(error);
-    }
-    res.sendStatus(200);
-    // req.logout(function(err) {
-    //   if (err) {
-    //     return next(err); 
-    //   }
-    //   res.sendStatus(200);
-    // });
+    // const logout = util.promisify(req.logout);
+    // try {
+    //   logout();
+    // } catch (error) {
+    //   return next(error);
+    // }
+    // res.sendStatus(200);
+    req.logout(function (err) {
+        if (err) {
+            return next(err);
+        }
+        res.sendStatus(200);
+    });
 });
 exports.router.post('/signup', function (req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {

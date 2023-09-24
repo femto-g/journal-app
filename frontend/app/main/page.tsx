@@ -7,9 +7,10 @@ import {
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import {redirect} from 'next/navigation';
 import { fetchGet } from "../util/util";
+import HeadingBar from "../components/HeadingBar/HeadingBar";
 export const queryclient = new QueryClient();
 //this should be protected? so make it Server component
-export default async function App() {
+export default function App() {
 
   //make request for session here and if request.ok is falsy redirect to login
 
@@ -22,6 +23,7 @@ export default async function App() {
   return (
 
     <QueryClientProvider client={queryclient}>
+      <HeadingBar/>
       <MainApp />
       <ReactQueryDevtools initialIsOpen={false}/>
     </QueryClientProvider>

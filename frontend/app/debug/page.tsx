@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { fetchGet } from "../util/util"
 
-export default async function Page(){
+export default function Page(){
 
   const onClick = async () => {
     await fetchGet('session');

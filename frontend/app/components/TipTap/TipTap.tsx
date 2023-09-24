@@ -9,7 +9,7 @@ import React from 'react'
 import './styles.css'
 import Underline from '@tiptap/extension-underline'
 
-const MenuBar = ({ editor } : {editor: Editor}) => {
+export const MenuBar = ({ editor } : {editor: Editor}) => {
   if (!editor) {
     return null
   }
