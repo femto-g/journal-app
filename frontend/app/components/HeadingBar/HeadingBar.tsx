@@ -1,12 +1,11 @@
 import { fetchGet } from "@/app/util/util";
 
 
-export default function HeadingBar(){
+export default function HeadingBar({ children } : {children: React.ReactNode}){
 
   return(
     <div>
-      <nav>Title</nav>
-      <button onClick={async () => fetchGet('logout')}>Logout</button>
+      {children}
     </div>
   )
 }

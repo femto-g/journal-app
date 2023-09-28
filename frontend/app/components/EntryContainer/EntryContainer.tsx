@@ -66,7 +66,11 @@ export default function EntryContainer({selectEntry, journal} : {selectEntry : F
   
   return(
     <div>
-      <button onClick={() => dataContext.setJournal(null)}>Back</button>
+      <div className="flex flex-row w-full">
+        <button onClick={() => dataContext.setJournal(null)}>Back</button>
+        <h1 className="text-center">Entries</h1>
+      </div>
+      
       <NewEntryForm journalID={journal.journal_id!} display={displayForm} />
       <ul>
         {listItems}

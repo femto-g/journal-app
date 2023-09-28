@@ -23,7 +23,9 @@ export default function App() {
   return (
 
     <QueryClientProvider client={queryclient}>
-      <HeadingBar/>
+      <HeadingBar>
+        <button className="border-2 border-black"onClick={() => fetchGet("logout")}>Logout</button>
+      </HeadingBar>
       <MainApp />
       <ReactQueryDevtools initialIsOpen={false}/>
     </QueryClientProvider>

@@ -26,6 +26,11 @@ export default function RichTextEditor({entry} : {entry : IEntry}){
   const [content, setContent] = useState<String>(entry.content_html);
   const debouncedContent = useDebounce<String>(content, 2000);
 
+  const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const monthNames =  ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const date : Date = new Date(entry.date);
+  const entryText = `${dayNames[date.getDay()]}, ${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+
   useEffect(() => {
     const body = {
       entry_id : entry.entry_id,
@@ -76,7 +81,10 @@ export default function RichTextEditor({entry} : {entry : IEntry}){
 
   return (
     <div>
+      <div className="flex flex-row w-full">
       <button onClick={() => dataContext.setEntry(null)}>Back</button>
+        <h1 className="text-center">{entryText}</h1>
+      </div>
       <MenuBar editor={editor!} />
       <EditorContent editor={editor} />
     </div>

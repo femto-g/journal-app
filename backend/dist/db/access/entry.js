@@ -45,7 +45,7 @@ function createEntry(entry) {
 exports.createEntry = createEntry;
 function readEntries(containing_journal) {
     return __awaiter(this, void 0, void 0, function* () {
-        const queryText = "SELECT * FROM entries where containing_journal=($1)";
+        const queryText = "SELECT * FROM entries where containing_journal=($1) ORDER BY date";
         const params = [containing_journal];
         const result = yield db.query(queryText, params);
         return result;

@@ -20,7 +20,7 @@ export async function createEntry(entry : Entry) : Promise<QueryResult<any>>{
 
 export async function readEntries(containing_journal : number) : Promise<QueryResult<any>> {
 
-  const queryText : string = "SELECT * FROM entries where containing_journal=($1)";
+  const queryText : string = "SELECT * FROM entries where containing_journal=($1) ORDER BY date";
   const params : Array<any> = [containing_journal];
   const result = await db.query(queryText, params)!;
   
