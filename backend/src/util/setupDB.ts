@@ -14,7 +14,7 @@ const createEntriesTable = `CREATE TABLE entries (
   containing_journal integer NOT NULL,
   FOREIGN KEY(containing_journal), 
   REFERENCES journals(journal_id),
-  [ON DELETE CASCADE]
+  ON DELETE CASCADE
 )`
 
 const createJournalsTable = `CREATE TABLE journals (
@@ -23,7 +23,7 @@ const createJournalsTable = `CREATE TABLE journals (
   owner integer NOT NULL,
   FOREIGN KEY(owner), 
   REFERENCES users(user_id),
-  [ON DELETE CASCADE]
+  ON DELETE CASCADE
 )`
 
 db.query(createUsersTable, []);
