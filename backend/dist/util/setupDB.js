@@ -35,16 +35,16 @@ const createEntriesTable = `CREATE TABLE entries (
   content_html text NOT NULL,
   date timestamp with time zone NOT NULL,
   containing_journal integer NOT NULL,
-  FOREIGN KEY(containing_journal), 
-  REFERENCES journals(journal_id),
+  FOREIGN KEY(containing_journal)
+  REFERENCES journals(journal_id)
   ON DELETE CASCADE
 )`;
 const createJournalsTable = `CREATE TABLE journals (
-  journal_id serial NOT NULL,
+  journal_id serial UNIQUE NOT NULL,
   title text NOT NULL,
   owner integer NOT NULL,
-  FOREIGN KEY(owner), 
-  REFERENCES users(user_id),
+  FOREIGN KEY(owner)
+  REFERENCES users(user_id)
   ON DELETE CASCADE
 )`;
 db.query(createUsersTable, []);
