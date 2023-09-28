@@ -26,6 +26,10 @@ const createJournalsTable = `CREATE TABLE journals (
   ON DELETE CASCADE
 )`
 
-db.query(createUsersTable, []);
-db.query(createJournalsTable, []);
-db.query(createEntriesTable, []);
+const run = async () => {
+  await db.query(createUsersTable, []);
+  await db.query(createJournalsTable, []);
+  await db.query(createEntriesTable, []);
+}
+
+run();
